@@ -19,7 +19,7 @@ namespace App.Tests
             var output = Program.Flatten(input);
             
             //Assert
-            Assert.Equal(output, new List<int>(){1,2,5,8,9});
+            Assert.Equal(new List<int>(){1,2,5,8,9},output);
     
         }
 
@@ -52,5 +52,18 @@ namespace App.Tests
             Assert.False(actualUneven);
 
         }
+
+        [Fact]
+        public void FilterFunction_ReturnsOnly_2_4_6()
+        {
+            var expected = new List<int> {2,4,6};
+            Predicate<int> even = Program.Even;
+            var input = new List<int> {1,2,3,4,5,6};
+            var actual = Program.Filter(input, even);
+
+            Assert.Equal(expected,actual);
+        }
+
+        
     }
 }
