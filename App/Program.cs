@@ -2,11 +2,16 @@
 
 namespace App
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine();
+        }
+
+        public static bool Even(int i)
+        {
+            return i % 2 == 0;
         }
     }
 }
