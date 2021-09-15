@@ -10,20 +10,10 @@ namespace App
         static void Main(string[] args)
         {
             Console.WriteLine("Kører");
-            var stream1 = new List<int>() {1, 2, 3};
-            Predicate<int> even = Even;
-            var output = Filter(stream1, Even);
-            //Console.WriteLine(Filter(stream1, Even));
-
-
-            //var stream2 = new List<int>() {5, 6};
-            //var input = new List<List<int>>() {stream1, stream2};
-            //var output = Flatten(input);
-            foreach(var entry in output)
-            {
-                Console.Write(entry + " ");
-            }            
+               
         }
+
+        
 
         public static bool Even(int i)
         {
@@ -39,6 +29,7 @@ namespace App
                 }
             }
         }
+
 
         public static IEnumerable<T> Flatten<T>(IEnumerable<IEnumerable<T>> items)
         {
