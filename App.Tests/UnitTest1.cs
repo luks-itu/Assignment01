@@ -64,6 +64,17 @@ namespace App.Tests
             Assert.Equal(expected,actual);
         }
 
+        [Fact]
+
+        public void SplitLineFunction_Returns_Hi_42_23Me_hello()
+        {
+            var lines = new List<string> {"Hi 88$","A@1","42 23Me","hello" };
+            var expected = new List<string>{"Hi","42","23Me","hello"};
+            var actual = Program.SplitLine(lines);
+            
+            Assert.Equal(expected,actual);
+        }
+
         
     }
 }
