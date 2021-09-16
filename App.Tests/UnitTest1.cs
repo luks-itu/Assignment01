@@ -68,11 +68,25 @@ namespace App.Tests
 
         public void SplitLineFunction_Returns_Hi_42_23Me_hello()
         {
-            var lines = new List<string> {"Hi 88$","A@1","42 23Me","hello" };
+            var lines = new List<string> {"Hi    88$","A@1","42 23Me","hello" };
             var expected = new List<string>{"Hi","42","23Me","hello"};
             var actual = Program.SplitLine(lines);
             
             Assert.Equal(expected,actual);
+        }
+
+        [Fact]
+        public void ResolutionsFunction_ReturnsOnly_FHD_720p()
+        {
+            var lines = new List<string> {"1920x1080","1024x768","138x21 213x213", " 23x23","4 5 3x2", "ax300","1ax2b","@10x23"};
+            var expected = new List<(int, int)> {(1920, 1080), (1024, 768), (138, 21), (213, 213), (23, 23), (3, 2)};
+
+            var actual = Program.Resolutions(lines);
+            
+            Assert.Equal(expected,actual);
+    
+            
+
         }
 
         
