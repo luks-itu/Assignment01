@@ -10,21 +10,41 @@ namespace App
         
         static void Main(string[] args)
         {
-            var lines = new List<string> { "these are wordsBut", "thi@s is not1 but this is 920" };
             Console.WriteLine("Kører");
-            var output = SplitLine(lines);
-            foreach(var entry in output){
-                Console.WriteLine(entry);
-            }
-            
+          
                
+        }
+
+        public static IEnumerable<(int width, int height)> Resolutions(IEnumerable<string> resolutions)
+        {
+            string pattern = @"(?<entireRes>(?<width>(?<=^|\s)[0-9]+)x(?<height>[0-9]+\b))";        
+            Regex reg = new Regex(pattern);
+            Match match;
+            
+
+
+            foreach(var line in resolutions)
+            {
+                match = reg.Match(line);
+                while (match.Success)
+                {
+                    string w = match.Groups["width"].Value;
+                    int width = int.Parse(w);
+                    string h = match.Groups["height"].Value;
+                    int height = int.Parse(h);
+                    
+
+                    yield return (width, height);
+                    match = match.NextMatch();
+                }
+            }
         }
 
         public static IEnumerable<string> SplitLine(IEnumerable<string> lines)
         {
             //create regex for special character
             string pattern = @"[^a-zA-Z0-9_]";
-            string whitespace = @"\s";
+            string whitespace = @"\s+";
             Regex reg = new Regex(pattern);
             bool illegalWord;
 
