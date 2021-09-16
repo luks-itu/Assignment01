@@ -10,20 +10,14 @@ namespace App
         
         static void Main(string[] args)
         {
-            var lines = new List<string> {"1920x1080","1024x768, 800x600, 640x480","ax300","1ax2b" };
             Console.WriteLine("Kører");
-            //var output = Resolutions(lines);
-            Console.WriteLine(output.GetType().FullName);
-            foreach(var entry in output){
-                Console.WriteLine(entry);
-            }
-            
+          
                
         }
 
         public static IEnumerable<(int width, int height)> Resolutions(IEnumerable<string> resolutions)
         {
-            string pattern = @"(?<entireRes>(?<width>[0-9]+)x(?<height>[0-9]+))";        
+            string pattern = @"(?<entireRes>(?<width>(?<=^|\s)[0-9]+)x(?<height>[0-9]+\b))";        
             Regex reg = new Regex(pattern);
             Match match;
             
@@ -50,7 +44,7 @@ namespace App
         {
             //create regex for special character
             string pattern = @"[^a-zA-Z0-9_]";
-            string whitespace = @"\s";
+            string whitespace = @"\s+";
             Regex reg = new Regex(pattern);
             bool illegalWord;
 
