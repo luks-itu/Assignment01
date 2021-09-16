@@ -11,13 +11,14 @@ namespace App
         static void Main(string[] args)
         {
             Console.WriteLine("Kører");
-          
+
+            
                
         }
 
         public static IEnumerable<(int width, int height)> Resolutions(IEnumerable<string> resolutions)
         {
-            string pattern = @"(?<entireRes>(?<width>(?<=^|\s)[0-9]+)x(?<height>[0-9]+\b))";        
+            string pattern = @"(?<entireRes>(?<width>(?<=^|\s)[0-9]+)x(?<height>[0-9]+\b))";      
             Regex reg = new Regex(pattern);
             Match match;
             
@@ -38,6 +39,26 @@ namespace App
                     match = match.NextMatch();
                 }
             }
+        }
+
+        public static IEnumerable<string> InnerText(string html, string tag)
+        {
+            string pattern = @"<"+tag+".*?>(?<innertext>.*?)</"+tag+">";
+            string replacePattern = @"(?<tag><.+?>|<\/\w+>)|(?<text>.*?)";
+            Regex reg = new Regex(pattern);
+            Regex replaceReg = new Regex(replacePattern);
+            Match match = reg.Match(html);
+
+            while(match.Success)
+            {
+                var output = replaceReg.Replace(match.Groups["innertext"].Value, "");
+                yield return output;
+                match = match.NextMatch();
+            }
+
+            
+
+
         }
 
         public static IEnumerable<string> SplitLine(IEnumerable<string> lines)

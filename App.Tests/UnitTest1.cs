@@ -89,6 +89,30 @@ namespace App.Tests
 
         }
 
+        [Fact]
+
+        public void InnertextFunction_Returns_Expected_Sample_output_with_tag_a()
+        {
+            string input = "<div>  <p>A <b>regular expression</b>, <b>regex</b> or <b>regexp</b> (sometimes called a <b>rational expression</b>) is, in <a href=/wiki/Theoretical_computer_science title=Theoretical computer science>theoretical computer science</a> and <a href=/wiki/Formal_language title=Formal language>formal language</a> theory, a sequence of <a href=/wiki/Character_(computing) title=Character (computing)>characters</a> that define a <i>search <a href=/wiki/Pattern_matching title=Pattern matching>pattern</a></i>. Usually this pattern is then used by <a href=/wiki/String_searching_algorithm title=String searching algorithm>string searching algorithms</a> for find or find and replace operations on <a href=/wiki/String_(computer_science) title=String (computer science)>strings</a>.</p></div> <p>hejsa</p>";
+            var expected = new List<string> {"theoretical computer science","formal language","characters", "pattern", "string searching algorithms", "strings"} ;
+            var actual = Program.InnerText(input, "a");
+
+            Assert.Equal(expected,actual);
+        }
+
+
+        [Fact]
+        public void InnertextFunction_Returns_Expected_Sample_output_with_tag_p()
+        {
+            string input = "<div>  <p>A <b>regular expression</b>, <b>regex</b> or <b>regexp</b> (sometimes called a <b>rational expression</b>) is, in <a href=/wiki/Theoretical_computer_science title=Theoretical computer science>theoretical computer science</a> and <a href=/wiki/Formal_language title=Formal language>formal language</a> theory, a sequence of <a href=/wiki/Character_(computing) title=Character (computing)>characters</a> that define a <i>search <a href=/wiki/Pattern_matching title=Pattern matching>pattern</a></i>. Usually this pattern is then used by <a href=/wiki/String_searching_algorithm title=String searching algorithm>string searching algorithms</a> for find or find and replace operations on <a href=/wiki/String_(computer_science) title=String (computer science)>strings</a>.</p></div> <p>hejsa</p>";
+            var expected = new List<string> {"A regular expression, regex or regexp (sometimes called a rational expression) is, in theoretical computer science and formal language theory, a sequence of characters that define a search pattern. Usually this pattern is then used by string searching algorithms for find or find and replace operations on strings.","hejsa"};
+            var actual = Program.InnerText(input, "p");
+
+            Assert.Equal(expected,actual);
+        }
+
+
+
         
     }
 }
